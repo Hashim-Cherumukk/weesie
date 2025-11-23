@@ -1,0 +1,1182 @@
+/* ========== Theme Variables (Premium White & Blue) ========== */
+:root {
+  /* Light Mode (Default now) */
+  --bg-color: #FFFFFF;
+  --bg-secondary-color: #F9FAFB;   /* Very subtle grey for contrast */
+  --text-color: #0F172A;           /* Deep Navy/Black for premium readability */
+  --text-secondary-color: #64748B; /* Slate grey for subtext */
+  --border-color: #E2E8F0;
+  
+  /* Premium Blue Brand Colors */
+  --primary-color: #0052FF;        /* "Inter" Blue or Royal Blue - High Trust/Tech */
+  --accent-color: #3375FF;         /* Lighter blue for interactions */
+  --highlight-color: #000000;      /* Black highlight for strong contrast */
+  --shadow-color: rgba(0, 82, 255, 0.15); /* Subtle blue-tinted shadow */
+}
+
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Arial', sans-serif; /* Recommended: Use 'Inter' font if possible */
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* ==========================================================================
+   SECTION animations (Fixed: Visible by default)
+   ========================================================================== */
+.text-reveal-wrapper {
+  overflow: visible; /* Changed from hidden so text doesn't get cut off */
+}
+
+[data-animation] {
+  opacity: 1; /* Force visible */
+  transform: none; /* No movement */
+  transition: none;
+}
+/* ==========================================================================
+   NAVBAR (Floating Island Style)
+   ========================================================================== */
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%); /* Perfectly center the fixed element */
+  width: 95%; /* Responsive width */
+  max-width: 500px; /* Maximum width for the "Island" look */
+  
+  background: rgba(255, 255, 255, 0.85); /* Light frosted glass */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Very subtle border */
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1); /* Soft premium drop shadow */
+  
+  border-radius: 100px; /* Pill shape */
+  padding: 0.8rem 1.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+/* Logo Styling */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-color);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  color: var(--primary-color); /* Blue dot or accent in logo */
+}
+
+/* Navigation Links (Desktop) */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  position: relative;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary-color);
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+}
+
+/* Simple dot indicator for hover instead of underline for cleaner look */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  transform: translateX(-50%) scale(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  transform: translateX(-50%) scale(1);
+}
+
+/* Toggle Button (Hamburger) - Hidden on Desktop */
+.nav-toggle,
+.nav-toggle-label {
+  display: none;
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS (The UX Part)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.8rem 1.5rem;
+    border-radius: 20px; /* Slightly less round on mobile for better space usage */
+    max-width: 90%; /* Fit screen better */
+  }
+
+  /* Hide the links by default on mobile */
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 2rem;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+    
+    /* Animation State: Hidden */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Show Hamburger Icon */
+  .nav-toggle-label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    width: 25px;
+  }
+  
+  .nav-toggle-label span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* Create the 'X' or animation when checked */
+  /* Note: In your HTML, add these pseudo-elements or multiple spans inside label if needed. 
+     For simple single span: */
+  .nav-toggle-label span::before,
+  .nav-toggle-label span::after {
+    /* If you stick to the single span line in HTML, ensure CSS supports 3 lines or use pseudo elements */
+    content: ''; 
+    /* Simplified for the "span" inside your label */
+  }
+
+  /* Logic: When checkbox is checked, show menu */
+  .nav-toggle:checked ~ .nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   HERO SECTION (Fixed Alignment & Spacing)
+   ========================================================================== */
+.hero-section {
+  min-height: 100vh; /* Full viewport height */
+  display: flex;
+  align-items: center; /* Center vertically */
+  background-color: var(--bg-color);
+  overflow: hidden;
+  /* Reduced top padding significantly to pull content up */
+  padding: 100px 0 40px 0; 
+}
+
+/* --- Main container --- */
+.hero-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  text-align: center;
+  /* Reduced gap between text and image for better fit */
+  gap: 2.5rem; 
+  width: 100%;
+}
+
+/* --- Left side text content --- */
+.hero-content-left { 
+  flex-basis: 100%; 
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-subtitle { 
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 0.8rem; /* Reduced space */
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.hero-title { 
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  line-height: 1.1;
+  margin-bottom: 1rem; /* Reduced space */
+  font-weight: 500;
+  color: var(--text-color);
+  letter-spacing: -1px;
+}
+
+.hero-title .highlight { 
+  color: var(--primary-color);
+}
+
+.hero-description { 
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem; /* Reduced space so buttons sit closer */
+  color: var(--text-secondary-color);
+  max-width: 500px;
+  margin-left: auto; 
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* --- Buttons --- */
+.hero-buttons {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  /* Reduced top margin so buttons are clearly visible */
+  margin-top: 1.5rem; 
+  padding-bottom: 5px;
+}
+
+/* Button Styling */
+.btn {
+  padding: 0.9rem 2rem; /* Slightly more compact */
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(0, 82, 255, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 82, 255, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-color);
+  background-color: var(--text-color);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* --- Right side image --- */
+.hero-image {
+  flex-basis: 100%; 
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Ensure vertical center */
+}
+
+.image-wrapper {
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.15);
+  width: 100%; /* Ensure it fits container */
+}
+
+.main-image { 
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+.glow-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  background: var(--primary-color);
+  filter: blur(80px); 
+  opacity: 0.1;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* --- DESKTOP STYLES (992px+) --- */
+@media (min-width: 992px) {
+  .hero-container {
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center; /* Ensures text and image are vertically centered relative to each other */
+    text-align: left;
+    gap: 3rem;
+  }
+
+  .hero-content-left { 
+    flex-basis: 50%; 
+    align-items: flex-start; 
+  }
+
+  .hero-image {
+    flex-basis: 45%; 
+    justify-content: flex-end; 
+  }
+
+  .hero-description { 
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .hero-buttons {
+    justify-content: flex-start;
+  }
+}
+/* ========== About Section ========== */
+.about-section {
+  padding: 100px 0 50px 0;
+  background: var(--bg-secondary-color);
+  min-height: 800px; /* Increased from 600px for "normal" height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  border-bottom: 1px solid var(--border-color);
+}
+
+.about-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.about-text {
+  flex: 1 1 500px;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  line-height: 1.4;
+  margin-bottom: 1.2rem;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  color: var(--text-secondary-color);
+  margin-bottom: 2rem;
+}
+
+.about-btn {
+  background: var(--primary-color);
+  color: #111;
+  padding: 0.8rem 1.6rem;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.about-image img {
+  max-width: 380px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+/* ========== Stats Section ========== */
+.about-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 9rem; /* Increased from 4rem to push stats lower */
+  flex-wrap: wrap;
+  gap: 2rem;
+  text-align: center;
+  padding-bottom: 2rem; /* Increased from 2rem for extra bottom spacing */
+}
+
+.stat {
+  flex: 1 1 150px;
+}
+
+.counter {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  display: block;
+  margin-bottom: 0.5rem;
+  
+}
+
+/* ================= Works Section (Premium Style) ================= */
+.works-section {
+  padding: 100px 0;
+  background-color: var(--bg-secondary-color); /* Subtle grey contrast */
+  text-align: center;
+}
+
+.section-header {
+  margin-bottom: 60px;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: var(--text-color);
+  letter-spacing: -1px;
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  color: var(--text-secondary-color);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Grid Layout */
+.works-grid {
+  display: grid;
+  /* Responsive grid: fits as many as possible, min width 350px */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+/* Card Styling */
+.work-card {
+  position: relative;
+  height: 400px; /* Fixed height for uniformity */
+  overflow: hidden;
+  border-radius: 20px; /* Softer corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  background: var(--bg-color);
+  cursor: pointer;
+}
+
+.work-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Hover Overlay - Dark for contrast */
+.work-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7); /* Clean dark overlay */
+  backdrop-filter: blur(3px); /* Premium blur effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.4s ease;
+}
+
+/* Content inside Overlay */
+.work-info {
+  text-align: center;
+  padding: 25px;
+  transform: translateY(30px);
+  transition: transform 0.4s ease;
+  width: 100%;
+}
+
+.work-info h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #FFFFFF; /* Always white on dark overlay */
+}
+
+.work-info p {
+  font-size: 1rem;
+  color: #CCCCCC; /* Light grey */
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+}
+
+/* View Button inside Card */
+.btn-view {
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--primary-color); /* Blue */
+  color: #FFFFFF;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 2px solid var(--primary-color);
+}
+
+.btn-view:hover {
+  background: transparent;
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+/* Hover Interactions */
+.work-card:hover .work-overlay {
+  opacity: 1;
+}
+
+.work-card:hover .work-info {
+  transform: translateY(0);
+}
+
+.work-card:hover img {
+  transform: scale(1.1);
+}
+
+/* View All Footer Button */
+.works-footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  .work-card {
+    height: 300px; /* Shorter cards on mobile */
+  }
+}
+
+/* ==========================================================================
+   REVIEWS SECTION (Premium White/Blue)
+   ========================================================================== */
+.reviews-section {
+  padding: 100px 0;
+  background-color: var(--bg-color); /* White */
+  position: relative;
+  overflow: hidden;
+}
+
+.reviews-scroller {
+  max-width: 1200px;
+  margin: 40px auto 0; /* Added top margin */
+  overflow: hidden;
+  /* Fade effect on edges */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+.reviews-track {
+  display: flex;
+  width: max-content;
+  /* 40s scroll speed */
+  animation: scroll 40s linear infinite;
+}
+
+/* Pause on hover so people can read */
+.reviews-scroller:hover .reviews-track {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* Move by width of 4 cards (350px width + 30px margin = 380px * 4 = 1520px) */
+    transform: translateX(-1520px);
+  }
+}
+
+.review-card {
+  flex-shrink: 0;
+  width: 350px;
+  /* Card Background: Very light grey/white with border */
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  padding: 30px;
+  margin: 0 15px; /* Gap between cards */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Soft shadow */
+  transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-color); /* Blue border on hover */
+}
+
+.review-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 3px solid var(--bg-secondary-color);
+}
+
+.review-text {
+  font-size: 1rem;
+  color: var(--text-secondary-color);
+  font-style: italic;
+  line-height: 1.6;
+  flex-grow: 1; 
+  margin-bottom: 20px;
+}
+
+.reviewer-info {
+  margin-top: auto; 
+}
+
+.reviewer-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 2px;
+}
+
+.reviewer-title {
+  font-size: 0.85rem;
+  color: var(--primary-color); /* Blue title */
+  font-weight: 500;
+}
+/* ========== Contact Section (Premium White/Blue) ========== */
+.contact-section {
+  padding: 100px 0;
+  background-color: var(--bg-secondary-color); /* Subtle grey background */
+}
+
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  background: var(--bg-color); /* White card */
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+}
+
+/* Left Side: Info */
+.contact-info h3 {
+  font-size: 1.8rem;
+  color: var(--text-color);
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.company-bio {
+  font-size: 1rem;
+  color: var(--text-secondary-color);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.contact-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-details li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.contact-details li svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 20px;
+  color: var(--primary-color); /* Blue icons */
+  flex-shrink: 0;
+}
+
+.social-links {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+}
+
+.social-icon {
+  width: 45px;
+  height: 45px;
+  color: var(--text-secondary-color);
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+
+/* Right Side: Form */
+.contact-form .form-group {
+  margin-bottom: 25px;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 15px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary-color); /* Light input bg */
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 4px rgba(0, 82, 255, 0.1); /* Blue focus ring */
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 18px;
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 82, 255, 0.2);
+}
+
+/* Mobile Response */
+@media (max-width: 768px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr; /* Stack on mobile */
+    padding: 30px;
+    gap: 40px;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+}
+
+
+/* ==========================================================================
+   POPUP MESSAGE
+   ========================================================================== */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.popup-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.popup-content {
+  background-color: var(--bg-secondary-color);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  transform: scale(0.9);
+  transition: transform 0.4s ease;
+}
+
+.popup-overlay.show .popup-content {
+  transform: scale(1);
+}
+
+.popup-icon {
+  width: 60px;
+  height: 60px;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.popup-content h2 {
+  font-size: 1.8rem;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.popup-content p {
+  color: var(--text-secondary-color);
+  margin-bottom: 25px;
+}
+
+#close-popup {
+  width: auto;
+  padding: 12px 30px;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.site-footer {
+  background-color: var(--bg-secondary-color);
+  color: var(--text-secondary-color);
+  padding: 60px 0 20px 0;
+  font-size: 0.9rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.footer-column h4 {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.footer-about {
+  line-height: 1.8;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: var(--text-secondary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--primary-color); /* Corrected from --primary */
+}
+
+.footer-social {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-social .social-icon {
+  color: var(--text-secondary-color);
+  width: 40px; /* Make sure icons are sized */
+  height: 40px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social .social-icon:hover {
+  color: var(--primary-color); /* Corrected from --primary */
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Allows toggle to wrap on very small screens */
+  gap: 15px;
+}
+
+/* ==========================================================================
+   THEME SWITCHER
+   ========================================================================== */
+#dark-mode-toggle { 
+  display: none; 
+}
+
+.dark-mode-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 55px;
+  height: 28px;
+  background-color: var(--bg-secondary-color);
+  border-radius: 50px;
+  padding: 5px;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+}
+
+/* The sliding circle */
+.dark-mode-label::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.dark-mode-label .sun { 
+  color: #f39c12; 
+}
+
+.dark-mode-label .moon { 
+  color: #f1c40f; 
+}
+
+/* When checkbox is checked (Light Mode ON) */
+#dark-mode-toggle:checked + .dark-mode-label {
+  background-color: var(--bg-color);
+  border-color: var(--border-color);
+}
+
+#dark-mode-toggle:checked + .dark-mode-label::after {
+  transform: translateX(26px);
+  background-color: #242424;
+}
+
+/* ==========================================================================
+   CONSOLIDATED RESPONSIVE STYLES
+   ========================================================================== */
+
+/* --- Hide Hamburger on Desktop --- */
+/* This is the default state: the hamburger icon is hidden */
+.nav-toggle,
+.nav-toggle-label {
+  display: none;
+}
+
+
+/* --- Tablet & Mobile Styles (Screens 900px wide or smaller) --- */
+@media (max-width: 900px) {
+
+  /* --- Responsive Navbar (Floating Pill) --- */
+  .navbar {
+    top: 20px;
+    width: calc(100% - 40px);
+    max-width: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50px;
+    padding: 0.8rem 1.5rem;
+    flex-direction: row; /* Ensures logo and hamburger are side-by-side */
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Show the hamburger icon on mobile */
+  .nav-toggle-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  /* Hamburger Icon Lines */
+  .nav-toggle-label span,
+  .nav-toggle-label span::before,
+  .nav-toggle-label span::after {
+    display: block;
+    position: relative;
+    background-color: var(--text-color);
+    height: 3px;
+    width: 100%;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .nav-toggle-label span::before,
+  .nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+  }
+  .nav-toggle-label span::before { top: -8px; }
+  .nav-toggle-label span::after { top: 8px; }
+  
+  /* Slide-out Menu */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 280px;
+    background-color: var(--surface-color);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+    padding: 0;
+  }
+  .nav-links a {
+    font-size: 1.2rem;
+  }
+
+  /* Logic to show menu and animate hamburger to 'X' */
+  .nav-toggle:checked ~ .nav-links {
+    transform: translateX(0);
+  }
+  .nav-toggle:checked ~ .nav-toggle-label span {
+    background-color: transparent;
+  }
+  .nav-toggle:checked ~ .nav-toggle-label span::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+  .nav-toggle:checked ~ .nav-toggle-label span::after {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+  
+  /* --- Responsive Layout for Sections --- */
+  .hero-container,
+  .about-container {
+    flex-direction: column-reverse; 
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    padding: 30px;
+  }
+
+  .hero-content-left, .hero-image,
+  .about-text, .about-image {
+    flex-basis: auto;
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+  
+  /* Corrected syntax for hiding <br> tag */
+  .hero-description br {
+    display: none;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+
+/* --- Small Mobile Styles (Screens 600px wide or smaller) --- */
+@media (max-width: 600px) {
+  .hero-title,
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .about-text h2 {
+    font-size: 1.6rem;
+  }
+
+  .about-stats {
+    margin-top: 4rem;
+  }
+
+  .review-card {
+    width: 300px;
+  }
+}

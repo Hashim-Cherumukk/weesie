@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You! | Weesie</title>
+  
+  <link rel="icon" type="image/png" href="assets/logo-only.png">
+  <link rel="apple-touch-icon" href="assets/logo-only.png">
+
+  <style>
+    /* ========== Theme Variables (Matches Main Site) ========== */
+    :root {
+      --primary-color: #0052FF;       /* Premium Blue */
+      --bg-color: #FFFFFF;            /* Clean White */
+      --text-color: #0F172A;          /* Dark Navy/Black */
+      --text-secondary: #64748B;      /* Slate Grey */
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body { 
+      font-family: 'Inter', 'Arial', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex; 
+      flex-direction: column;
+      justify-content: center; 
+      align-items: center;
+      height: 100vh; 
+      text-align: center; 
+      margin: 0;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    /* --- Checkmark Animation Container --- */
+    .checkmark-wrapper {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 30px;
+      position: relative;
+    }
+
+    /* The Circle Border */
+    .checkmark-circle {
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      stroke-width: 4; /* Thicker for premium feel */
+      stroke: var(--primary-color);
+      fill: none;
+      animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+
+    /* The Checkmark Icon */
+    .checkmark {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: block;
+      stroke-width: 4;
+      stroke: var(--white); /* White checkmark */
+      stroke-miterlimit: 10;
+      box-shadow: inset 0px 0px 0px var(--primary-color);
+      animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    }
+
+    .checkmark-check {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+    }
+
+    /* --- Animations Keyframes --- */
+    @keyframes stroke {
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes scale {
+      0%, 100% { transform: none; }
+      50% { transform: scale3d(1.1, 1.1, 1); }
+    }
+    @keyframes fill {
+      100% { box-shadow: inset 0px 0px 0px 60px var(--primary-color); } /* Fills circle with Blue */
+    }
+
+    /* --- Text & Button Styling --- */
+    .text-reveal-wrapper {
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .thank-you-h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--text-color);
+      margin: 0;
+      letter-spacing: -1px;
+      opacity: 0;
+      animation: revealUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      animation-delay: 1s;
+    }
+
+    .thank-you-p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin: 0;
+      max-width: 400px;
+      line-height: 1.6;
+      opacity: 0;
+      animation: revealUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      animation-delay: 1.2s;
+    }
+
+    .thank-you-button {
+      margin-top: 40px;
+      opacity: 0;
+      animation: revealUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      animation-delay: 1.4s;
+      
+      display: inline-block;
+      padding: 14px 32px;
+      color: var(--white);
+      background-color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px rgba(0, 82, 255, 0.2);
+    }
+
+    .thank-you-button:hover {
+      transform: translateY(-3px);
+      background-color: transparent;
+      color: var(--primary-color);
+      box-shadow: 0 15px 30px rgba(0, 82, 255, 0.3);
+    }
+
+    @keyframes revealUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="thank-you-content">
+    
+    <div class="checkmark-wrapper">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+      </svg>
+    </div>
+
+    <div class="text-reveal-wrapper">
+      <h1 class="thank-you-h1">Got it!</h1>
+    </div>
+    <div class="text-reveal-wrapper">
+      <p class="thank-you-p">I've received your message and will be in touch shortly.</p>
+    </div>
+    
+    <a href="index.html" class="thank-you-button">Return to Home</a>
+  </div>
+
+</body>
+</html>
