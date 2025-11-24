@@ -46,24 +46,24 @@ body {
   transition: none;
 }
 /* ==========================================================================
-   NAVBAR (Floating Island Style)
+   NAVBAR (Floating Island - Desktop & Mobile Optimized)
    ========================================================================== */
 .navbar {
   position: fixed;
   top: 20px;
   left: 50%;
-  transform: translateX(-50%); /* Perfectly center the fixed element */
-  width: 95%; /* Responsive width */
-  max-width: 500px; /* Maximum width for the "Island" look */
+  transform: translateX(-50%);
+  width: 95%;
+  max-width: 500px; /* Desktop width */
   
-  background: rgba(255, 255, 255, 0.85); /* Light frosted glass */
+  background: rgba(255, 255, 255, 0.9); /* Slightly less transparent for readability */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.05); /* Very subtle border */
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1); /* Soft premium drop shadow */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
   
-  border-radius: 100px; /* Pill shape */
-  padding: 0.8rem 1.8rem;
+  border-radius: 100px;
+  padding: 0.7rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,23 +71,31 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Logo Styling */
+/* --- Logo Styling (Fixed) --- */
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.2rem;
+  gap: 10px; /* Space between image and text */
+  text-decoration: none;
+}
+
+/* The Logo Image */
+.logo-icon {
+  height: 35px; /* Fixed height ensures it fits the navbar */
+  width: auto;  /* Maintain aspect ratio */
+  object-fit: contain;
+  display: block;
+}
+
+/* The Logo Text */
+.logo span {
+  font-size: 1.3rem;
   font-weight: 800;
   color: var(--text-color);
-  text-decoration: none;
   letter-spacing: -0.5px;
 }
 
-.logo span {
-  color: var(--primary-color); /* Blue dot or accent in logo */
-}
-
-/* Navigation Links (Desktop) */
+/* --- Navigation Links (Desktop) --- */
 .nav-links {
   display: flex;
   gap: 2rem;
@@ -98,7 +106,7 @@ body {
   position: relative;
   text-decoration: none;
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-secondary-color);
   transition: color 0.3s ease;
 }
@@ -107,14 +115,14 @@ body {
   color: var(--primary-color);
 }
 
-/* Simple dot indicator for hover instead of underline for cleaner look */
+/* Dot Indicator on Hover */
 .nav-links a::after {
   content: '';
   position: absolute;
   bottom: -4px;
   left: 50%;
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   background-color: var(--primary-color);
   border-radius: 50%;
   transform: translateX(-50%) scale(0);
@@ -125,42 +133,36 @@ body {
   transform: translateX(-50%) scale(1);
 }
 
-/* Toggle Button (Hamburger) - Hidden on Desktop */
-.nav-toggle,
+/* Hamburger Checkbox - Always Hidden */
+.nav-toggle {
+  display: none;
+}
+
+/* Hamburger Icon - Hidden on Desktop */
 .nav-toggle-label {
   display: none;
 }
 
 /* ==========================================================================
-   MOBILE RESPONSIVENESS (The UX Part)
+   MOBILE RESPONSIVENESS (Max Width 900px)
    ========================================================================== */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  
+  /* Adjust the floating bar for mobile */
   .navbar {
-    padding: 0.8rem 1.5rem;
-    border-radius: 20px; /* Slightly less round on mobile for better space usage */
-    max-width: 90%; /* Fit screen better */
+    width: 90%; /* Slightly narrower on mobile */
+    padding: 0.8rem 1.2rem;
+    border-radius: 20px; /* Rounded rectangle instead of pill for menu support */
+    flex-wrap: wrap; /* Allow wrapping for the dropdown */
   }
 
-  /* Hide the links by default on mobile */
-  .nav-links {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #FFFFFF;
-    border-radius: 20px;
-    padding: 2rem;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 10px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    border: 1px solid rgba(0,0,0,0.05);
-    
-    /* Animation State: Hidden */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Adjust Logo Text size for mobile */
+  .logo span {
+    font-size: 1.2rem;
+  }
+  
+  .logo-icon {
+    height: 30px;
   }
 
   /* Show Hamburger Icon */
@@ -169,36 +171,78 @@ body {
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
-    width: 25px;
+    width: 26px;
+    height: 20px;
+    justify-content: center;
   }
   
-  .nav-toggle-label span {
+  /* Hamburger Lines */
+  .nav-toggle-label span,
+  .nav-toggle-label span::before,
+  .nav-toggle-label span::after {
     display: block;
     width: 100%;
     height: 2px;
     background-color: var(--text-color);
     border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+  }
+
+  .nav-toggle-label span { position: relative; }
+  .nav-toggle-label span::before { content: ''; top: -7px; }
+  .nav-toggle-label span::after { content: ''; top: 7px; }
+
+  /* --- Mobile Dropdown Menu --- */
+  .nav-links {
+    /* Start hidden */
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    
+    /* Floating Card Style */
+    background: #FFFFFF;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    margin-top: 15px;
+    
+    /* Animation Props */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-links a {
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+    opacity: 0;
+    transform: translateY(-10px);
     transition: all 0.3s ease;
   }
 
-  /* Create the 'X' or animation when checked */
-  /* Note: In your HTML, add these pseudo-elements or multiple spans inside label if needed. 
-     For simple single span: */
-  .nav-toggle-label span::before,
-  .nav-toggle-label span::after {
-    /* If you stick to the single span line in HTML, ensure CSS supports 3 lines or use pseudo elements */
-    content: ''; 
-    /* Simplified for the "span" inside your label */
+  .nav-links a:last-child { border-bottom: none; }
+
+  /* --- OPEN STATE (When Checkbox Checked) --- */
+  .nav-toggle:checked ~ .nav-links {
+    max-height: 300px; /* Enough height for links */
+    opacity: 1;
+    padding-top: 10px;
   }
 
-  /* Logic: When checkbox is checked, show menu */
-  .nav-toggle:checked ~ .nav-links {
+  .nav-toggle:checked ~ .nav-links a {
     opacity: 1;
-    visibility: visible;
     transform: translateY(0);
   }
-}
 
+  /* Turn Hamburger into X */
+  .nav-toggle:checked ~ .nav-toggle-label span { background: transparent; }
+  .nav-toggle:checked ~ .nav-toggle-label span::before { top: 0; transform: rotate(45deg); }
+  .nav-toggle:checked ~ .nav-toggle-label span::after { top: 0; transform: rotate(-45deg); }
+}
 /* ==========================================================================
    HERO SECTION (Fixed Alignment & Spacing)
    ========================================================================== */
