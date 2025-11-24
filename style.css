@@ -1186,3 +1186,313 @@ body {
     width: 300px;
   }
 }
+
+
+/* ==========================================================================
+   WORKS PAGE SPECIFIC STYLES
+   ========================================================================== */
+
+/* --- Page Header --- */
+.page-header {
+  padding: 160px 0 60px 0;
+  text-align: center;
+  background-color: var(--bg-color);
+}
+
+.page-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-color);
+  margin-bottom: 15px;
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary-color);
+  margin-bottom: 40px;
+}
+
+/* --- Filters --- */
+.filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 10px 25px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary-color);
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 82, 255, 0.2);
+}
+
+/* --- Works Gallery Grid --- */
+.works-gallery {
+  padding-bottom: 100px;
+  background-color: var(--bg-color);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 350px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+/* Hover Overlay */
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-text {
+  text-align: center;
+  color: #fff;
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
+}
+
+.gallery-text h3 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.gallery-text p {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-view-project {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Hover Effects */
+.gallery-item:hover {
+  transform: translateY(-5px);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-item:hover .gallery-text {
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-title { font-size: 2.2rem; }
+  .gallery-item { height: 280px; }
+}
+
+/* ==========================================================================
+   PROJECT DETAILS PAGE
+   ========================================================================== */
+
+/* --- Hero Section --- */
+.project-hero {
+  padding-top: 140px;
+  padding-bottom: 40px;
+  background-color: var(--bg-color);
+}
+
+.project-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 50px;
+}
+
+.project-category {
+  color: var(--primary-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.project-header h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: var(--text-color);
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.project-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary-color);
+  line-height: 1.6;
+}
+
+/* --- Main Hero Image --- */
+.project-main-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+}
+
+/* --- Project Meta Data (Client, Date, etc) --- */
+.project-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 30px;
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border-color);
+}
+
+.meta-item h5 {
+  font-size: 0.9rem;
+  color: var(--text-secondary-color);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.meta-item p, .meta-item a {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.meta-item a:hover {
+  color: var(--primary-color);
+}
+
+/* --- Content Area --- */
+.project-content {
+  padding: 60px 0 100px;
+  background-color: var(--bg-color);
+}
+
+.content-block {
+  max-width: 700px;
+  margin: 0 auto 60px;
+}
+
+.content-block h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+.content-block p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary-color);
+}
+
+/* --- Galleries --- */
+.project-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.project-gallery-grid img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.project-full-image img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* --- Next Project Nav --- */
+.next-project {
+  background-color: var(--bg-secondary-color);
+  padding: 80px 0;
+  text-align: center;
+}
+
+.next-project p {
+  color: var(--text-secondary-color);
+  margin-bottom: 10px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.next-link {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.next-link:hover {
+  color: var(--primary-color);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .project-gallery-grid {
+    grid-template-columns: 1fr; /* Stack images on mobile */
+  }
+  .project-header h1 {
+    font-size: 2.5rem;
+  }
+  .next-link {
+    font-size: 1.8rem;
+  }
+}
