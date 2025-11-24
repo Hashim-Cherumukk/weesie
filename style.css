@@ -763,6 +763,12 @@ body {
   padding: 10px;
 }
 
+.social-icon:hover {
+  color: var(--primary-color); /* Blue on hover */
+  border-color: var(--primary-color);
+  transform: translateY(-3px);
+}
+
 
 /* Right Side: Form */
 .contact-form .form-group {
